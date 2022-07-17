@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript View</title>
+    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+
+
+</head>
+
+<body>
+
+<form id="form">
+    Message: <input id="message" name="message" type="text"/><br />
+    Long: <input id="length" name="length" type="checkbox" /><br />
+
+    <input type="submit" value="Make Toast" />
+</form>
+<div class="plyr__video-embed" id="player">
+    <iframe
+            src="https://www.youtube.com/embed/bTqVqk7FSmY"
+            allowfullscreen
+            allowtransparency
+            allow="autoplay"
+    ></iframe>
+</div>
+<script type="text/javascript">
+console.log(document.getElementById('player'))
+const player = new Plyr(document.getElementById('player'));
+console.log(player)
+player.on('ready', (event) => {
+console.log("ready")
+});
+player.on('statechange', (event) => {
+console.log("readyevent",event)
+});
+
+function showToast(){
+var message = document.getElementById("message").value;
+var lengthLong = document.getElementById("length").checked;
+
+/*
+Call the 'makeToast' method in the Java code.
+'app' is specified in MainActivity.java when
+adding the JavaScript interface.
+*/
+app.makeToast(message, lengthLong);
+return false;
+}
+
+/*
+Call the 'showToast' method when the form gets
+submitted (by pressing button or return key on keyboard).
+*/
+window.onload = function(){
+var form = document.getElementById("form");
+form.onsubmit = showToast;
+}
+</script>
+</body>
+</html>
